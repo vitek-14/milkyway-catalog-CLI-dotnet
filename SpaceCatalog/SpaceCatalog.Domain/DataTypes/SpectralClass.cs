@@ -1,0 +1,14 @@
+namespace SpaceCatalog.Domain.DataTypes
+{
+    public enum SpectralClass
+    {
+        Unknown = 0,
+        O = 1,
+        B = 2,
+        A = 3,
+        F = 4,
+        G = 5,
+        K = 6,
+        M = 7
+    }
+}
