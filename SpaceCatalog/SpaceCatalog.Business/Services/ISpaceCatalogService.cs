@@ -1,14 +1,14 @@
-using SpaceCatalog.Business.Models;
+using SpaceCatalog.Business.Dto;
 
 namespace SpaceCatalog.Business.Services
 {
     public interface ISpaceCatalogService
     {
-        List<StarSystemListItem> SearchStarSystems(string query);
-        StarSystemDetail? GetStarSystemDetail(int starSystemId);
-        OperationResult CreateStarSystemWithMainStar(CreateStarSystemRequest request);
-        OperationResult CreateExoplanetForStar(int starId, CreateExoplanetRequest request);
-        ExoplanetEditModel? GetExoplanetForEdit(int exoplanetId);
-        OperationResult UpdateExoplanet(UpdateExoplanetRequest request);
+        List<StarSystemListItemDto> SearchStarSystems(string query);
+        StarSystemDetailDto? GetStarSystemDetail(int starSystemId);
+        OperationResultDto CreateStarSystemWithMainStar(CreateStarSystemRequestDto request);
+        OperationResultDto CreateExoplanetForStar(int starId, CreateExoplanetRequestDto request);
+        ExoplanetEditModelDto? GetExoplanetForEdit(int exoplanetId);
+        OperationResultDto UpdateExoplanet(UpdateExoplanetRequestDto request);
     }
 }

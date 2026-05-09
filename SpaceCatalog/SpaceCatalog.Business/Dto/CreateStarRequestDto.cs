@@ -1,11 +1,12 @@
 using SpaceCatalog.Domain.DataTypes;
 
-namespace SpaceCatalog.Business.Models
+namespace SpaceCatalog.Business.Dto
 {
-    public class StarListItem
+    public class CreateStarRequestDto
     {
-        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public SpectralClass SpectralClass { get; set; }
+        public double Mass { get; set; }
+        public double Age { get; set; }
     }
 }

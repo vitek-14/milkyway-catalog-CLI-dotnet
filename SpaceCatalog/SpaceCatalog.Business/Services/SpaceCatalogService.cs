@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SpaceCatalog.Business.Factories;
-using SpaceCatalog.Business.Models;
+using SpaceCatalog.Business.Dto;
 using SpaceCatalog.Data;
 using SpaceCatalog.Domain;
 
@@ -17,7 +17,7 @@ namespace SpaceCatalog.Business.Services
             this.spaceObjectFactory = spaceObjectFactory;
         }
 
-        public List<StarSystemListItem> SearchStarSystems(string query)
+        public List<StarSystemListItemDto> SearchStarSystems(string query)
         {
             var normalizedQuery = query.Trim().ToLower();
 
@@ -27,7 +27,7 @@ namespace SpaceCatalog.Business.Services
                     .AsNoTracking()
                     .Where(starSystem => starSystem.Name.ToLower().Contains(normalizedQuery))
                     .OrderBy(starSystem => starSystem.Name)
-                    .Select(starSystem => new StarSystemListItem
+                    .Select(starSystem => new StarSystemListItemDto
                     {
                         Id = starSystem.Id,
                         Name = starSystem.Name
@@ -36,7 +36,7 @@ namespace SpaceCatalog.Business.Services
             }
         }
 
-        public StarSystemDetail? GetStarSystemDetail(int starSystemId)
+        public StarSystemDetailDto? GetStarSystemDetail(int starSystemId)
         {
             using (var context = contextFactory())
             {
@@ -51,7 +51,7 @@ namespace SpaceCatalog.Business.Services
                     return null;
                 }
 
-                return new StarSystemDetail
+                return new StarSystemDetailDto
                 {
                     Id = starSystem.Id,
                     Name = starSystem.Name,
@@ -60,7 +60,7 @@ namespace SpaceCatalog.Business.Services
                     Deklinace = starSystem.Coordinates.Declination,
                     Stars = starSystem.Stars
                         .OrderBy(star => star.Name)
-                        .Select(star => new StarListItem
+                        .Select(star => new StarListItemDto
                         {
                             Id = star.Id,
                             Name = star.Name,
@@ -69,7 +69,7 @@ namespace SpaceCatalog.Business.Services
                         .ToList(),
                     Exoplanets = starSystem.Exoplanets
                         .OrderBy(exoplanet => exoplanet.Name)
-                        .Select(exoplanet => new ExoplanetListItem
+                        .Select(exoplanet => new ExoplanetListItemDto
                         {
                             Id = exoplanet.Id,
                             Name = exoplanet.Name,
@@ -80,13 +80,13 @@ namespace SpaceCatalog.Business.Services
             }
         }
 
-        public OperationResult CreateStarSystemWithMainStar(CreateStarSystemRequest request)
+        public OperationResultDto CreateStarSystemWithMainStar(CreateStarSystemRequestDto request)
         {
             var systemName = request.SystemName.Trim();
 
             if (string.IsNullOrWhiteSpace(systemName))
             {
-                return OperationResult.Fail("Nazev systemu je povinny.");
+                return OperationResultDto.Fail("Nazev systemu je povinny.");
             }
 
             try
@@ -98,7 +98,7 @@ namespace SpaceCatalog.Business.Services
 
                     if (nameExists)
                     {
-                        return OperationResult.Fail("System s timto nazvem jiz existuje.");
+                        return OperationResultDto.Fail("System s timto nazvem jiz existuje.");
                     }
 
                     var starSystem = spaceObjectFactory.CreateStarSystemWithMainStar(request);
@@ -108,17 +108,17 @@ namespace SpaceCatalog.Business.Services
 
                     var mainStar = starSystem.Stars.First();
 
-                    return OperationResult.Ok($"System '{starSystem.Name}' byl zalozen. ID systemu: {starSystem.Id}, ID hvezdy: {mainStar.Id}.");
+                    return OperationResultDto.Ok($"System '{starSystem.Name}' byl zalozen. ID systemu: {starSystem.Id}, ID hvezdy: {mainStar.Id}.");
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error occured while saving entity to the database. Error type: {ex}; message: {ex.Message}");
-                return OperationResult.Fail("System se nepodarilo ulozit.");
+                return OperationResultDto.Fail("System se nepodarilo ulozit.");
             }
         }
 
-        public OperationResult CreateExoplanetForStar(int starId, CreateExoplanetRequest request)
+        public OperationResultDto CreateExoplanetForStar(int starId, CreateExoplanetRequestDto request)
         {
             try
             {
@@ -128,12 +128,12 @@ namespace SpaceCatalog.Business.Services
 
                     if (star == null)
                     {
-                        return OperationResult.Fail("Hvezda neexistuje.");
+                        return OperationResultDto.Fail("Hvezda neexistuje.");
                     }
 
                     if (star.StarSystemId == null)
                     {
-                        return OperationResult.Fail("Hvezda neni prirazena k hvezdnemu systemu.");
+                        return OperationResultDto.Fail("Hvezda neni prirazena k hvezdnemu systemu.");
                     }
 
                     var exoplanet = spaceObjectFactory.CreateExoplanet(request, star.StarSystemId.Value);
@@ -146,17 +146,17 @@ namespace SpaceCatalog.Business.Services
                     context.Exoplanets.Add(exoplanet);
                     context.SaveChanges();
 
-                    return OperationResult.Ok($"Exoplaneta '{exoplanet.Name}' byla ulozena. ID exoplanety: {exoplanet.Id}.");
+                    return OperationResultDto.Ok($"Exoplaneta '{exoplanet.Name}' byla ulozena. ID exoplanety: {exoplanet.Id}.");
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error occured while saving entity to the database. Error type: {ex}; message: {ex.Message}");
-                return OperationResult.Fail("Exoplanetu se nepodarilo ulozit.");
+                return OperationResultDto.Fail("Exoplanetu se nepodarilo ulozit.");
             }
         }
 
-        public ExoplanetEditModel? GetExoplanetForEdit(int exoplanetId)
+        public ExoplanetEditModelDto? GetExoplanetForEdit(int exoplanetId)
         {
             using (var context = contextFactory())
             {
@@ -170,7 +170,7 @@ namespace SpaceCatalog.Business.Services
                     return null;
                 }
 
-                return new ExoplanetEditModel
+                return new ExoplanetEditModelDto
                 {
                     Id = exoplanet.Id,
                     Name = exoplanet.Name,
@@ -180,7 +180,7 @@ namespace SpaceCatalog.Business.Services
             }
         }
 
-        public OperationResult UpdateExoplanet(UpdateExoplanetRequest request)
+        public OperationResultDto UpdateExoplanet(UpdateExoplanetRequestDto request)
         {
             try
             {
@@ -192,7 +192,7 @@ namespace SpaceCatalog.Business.Services
 
                     if (exoplanet == null)
                     {
-                        return OperationResult.Fail("Exoplaneta nenalezena.");
+                        return OperationResultDto.Fail("Exoplaneta nenalezena.");
                     }
 
                     Star? newStar = null;
@@ -204,12 +204,12 @@ namespace SpaceCatalog.Business.Services
 
                         if (newStar == null)
                         {
-                            return OperationResult.Fail("Nova hvezda neexistuje. Puvodni vazba zustala beze zmeny.");
+                            return OperationResultDto.Fail("Nova hvezda neexistuje. Puvodni vazba zustala beze zmeny.");
                         }
 
                         if (newStar.StarSystemId == null)
                         {
-                            return OperationResult.Fail("Nova hvezda neni prirazena k hvezdnemu systemu.");
+                            return OperationResultDto.Fail("Nova hvezda neni prirazena k hvezdnemu systemu.");
                         }
 
                         newStarSystemId = newStar.StarSystemId.Value;
@@ -231,13 +231,13 @@ namespace SpaceCatalog.Business.Services
 
                     context.SaveChanges();
 
-                    return OperationResult.Ok("Exoplaneta byla aktualizovana.");
+                    return OperationResultDto.Ok("Exoplaneta byla aktualizovana.");
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error occured while saving entity to the database. Error type: {ex}; message: {ex.Message}");
-                return OperationResult.Fail("Exoplanetu se nepodarilo aktualizovat.");
+                return OperationResultDto.Fail("Exoplanetu se nepodarilo aktualizovat.");
             }
         }
     }

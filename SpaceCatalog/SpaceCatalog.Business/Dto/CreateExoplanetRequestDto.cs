@@ -1,8 +1,8 @@
 using SpaceCatalog.Domain.DataTypes;
 
-namespace SpaceCatalog.Business.Models
+namespace SpaceCatalog.Business.Dto
 {
-    public class CreateExoplanetRequest
+    public class CreateExoplanetRequestDto
     {
         public string Name { get; set; } = string.Empty;
         public ExoplanetType Type { get; set; }

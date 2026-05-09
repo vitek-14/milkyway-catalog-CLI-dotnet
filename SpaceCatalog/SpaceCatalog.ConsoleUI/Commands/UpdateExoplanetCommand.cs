@@ -1,4 +1,4 @@
-using SpaceCatalog.Business.Models;
+using SpaceCatalog.Business.Dto;
 using SpaceCatalog.Business.Services;
 using SpaceCatalog.ConsoleUI.Infrastructure;
 using SpaceCatalog.Domain.DataTypes;
@@ -44,7 +44,7 @@ namespace SpaceCatalog.ConsoleUI.Commands
             var newType = ConsoleInput.ReadOptionalEnum("Novy typ (ENTER ponecha stavajici): ", current.Type);
             var newStarId = ConsoleInput.ReadNullableInt("Nove ID materske hvezdy (ENTER ponecha stavajici): ");
 
-            var request = new UpdateExoplanetRequest
+            var request = new UpdateExoplanetRequestDto
             {
                 ExoplanetId = current.Id,
                 Name = string.IsNullOrWhiteSpace(newName) ? current.Name : newName,

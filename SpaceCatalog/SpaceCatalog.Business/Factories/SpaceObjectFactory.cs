@@ -1,4 +1,4 @@
-using SpaceCatalog.Business.Models;
+using SpaceCatalog.Business.Dto;
 using SpaceCatalog.Domain;
 using SpaceCatalog.Domain.DataTypes;
 
@@ -6,7 +6,7 @@ namespace SpaceCatalog.Business.Factories
 {
     public class SpaceObjectFactory : ISpaceObjectFactory
     {
-        public StarSystem CreateStarSystemWithMainStar(CreateStarSystemRequest request)
+        public StarSystem CreateStarSystemWithMainStar(CreateStarSystemRequestDto request)
         {
             var starSystem = new StarSystem
             {
@@ -33,7 +33,7 @@ namespace SpaceCatalog.Business.Factories
             return starSystem;
         }
 
-        public Exoplanet CreateExoplanet(CreateExoplanetRequest request, int starSystemId)
+        public Exoplanet CreateExoplanet(CreateExoplanetRequestDto request, int starSystemId)
         {
             return new Exoplanet
             {

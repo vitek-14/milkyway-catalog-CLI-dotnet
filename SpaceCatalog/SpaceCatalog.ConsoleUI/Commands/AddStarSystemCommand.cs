@@ -1,4 +1,4 @@
-using SpaceCatalog.Business.Models;
+using SpaceCatalog.Business.Dto;
 using SpaceCatalog.Business.Services;
 using SpaceCatalog.ConsoleUI.Infrastructure;
 
@@ -43,7 +43,7 @@ namespace SpaceCatalog.ConsoleUI.Commands
                 return;
             }
 
-            var request = new CreateStarSystemRequest
+            var request = new CreateStarSystemRequestDto
             {
                 SystemName = systemName,
                 Rektascenze = rektascenze,
@@ -79,7 +79,7 @@ namespace SpaceCatalog.ConsoleUI.Commands
                 return;
             }
 
-            request.MainStar = new CreateStarRequest
+            request.MainStar = new CreateStarRequestDto
             {
                 Name = starName,
                 Mass = starMass.Value,

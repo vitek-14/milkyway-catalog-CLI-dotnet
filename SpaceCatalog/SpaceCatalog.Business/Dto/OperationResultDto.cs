@@ -1,22 +1,22 @@
-namespace SpaceCatalog.Business.Models
+namespace SpaceCatalog.Business.Dto
 {
-    public class OperationResult
+    public class OperationResultDto
     {
         public bool Success { get; set; }
         public string Message { get; set; } = string.Empty;
 
-        public static OperationResult Ok(string message)
+        public static OperationResultDto Ok(string message)
         {
-            return new OperationResult
+            return new OperationResultDto
             {
                 Success = true,
                 Message = message
             };
         }
 
-        public static OperationResult Fail(string message)
+        public static OperationResultDto Fail(string message)
         {
-            return new OperationResult
+            return new OperationResultDto
             {
                 Success = false,
                 Message = message

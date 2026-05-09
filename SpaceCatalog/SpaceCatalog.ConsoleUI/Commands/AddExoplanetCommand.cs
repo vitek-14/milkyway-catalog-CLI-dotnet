@@ -1,4 +1,4 @@
-using SpaceCatalog.Business.Models;
+using SpaceCatalog.Business.Dto;
 using SpaceCatalog.Business.Services;
 using SpaceCatalog.ConsoleUI.Infrastructure;
 using SpaceCatalog.Domain.DataTypes;
@@ -50,7 +50,7 @@ namespace SpaceCatalog.ConsoleUI.Commands
                 return;
             }
 
-            var request = new CreateExoplanetRequest
+            var request = new CreateExoplanetRequestDto
             {
                 Name = name,
                 Type = type.Value,
