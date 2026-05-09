@@ -12,6 +12,6 @@ namespace SpaceCatalog.Domain
         public StarSystem? StarSystem { get; set; }
         public int? NebulaId { get; set; }
         public Nebula? Nebula { get; set; }
-        public ICollection<StarExoplanet> StarExoplanets { get; set; } = new List<StarExoplanet>();
+        public ICollection<Exoplanet> Exoplanets { get; set; } = new List<Exoplanet>();
     }
 }

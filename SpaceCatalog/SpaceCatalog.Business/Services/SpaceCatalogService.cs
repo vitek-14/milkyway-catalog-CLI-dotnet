@@ -137,11 +137,7 @@ namespace SpaceCatalog.Business.Services
                     }
 
                     var exoplanet = spaceObjectFactory.CreateExoplanet(request, star.StarSystemId.Value);
-                    exoplanet.StarExoplanets.Add(new StarExoplanet
-                    {
-                        StarId = star.Id,
-                        Exoplanet = exoplanet
-                    });
+                    exoplanet.Stars.Add(star);
 
                     context.Exoplanets.Add(exoplanet);
                     context.SaveChanges();
@@ -162,7 +158,7 @@ namespace SpaceCatalog.Business.Services
             {
                 var exoplanet = context.Exoplanets
                     .AsNoTracking()
-                    .Include(existingExoplanet => existingExoplanet.StarExoplanets)
+                    .Include(existingExoplanet => existingExoplanet.Stars)
                     .FirstOrDefault(existingExoplanet => existingExoplanet.Id == exoplanetId);
 
                 if (exoplanet == null)
@@ -175,7 +171,7 @@ namespace SpaceCatalog.Business.Services
                     Id = exoplanet.Id,
                     Name = exoplanet.Name,
                     Type = exoplanet.Type,
-                    CurrentStarId = exoplanet.StarExoplanets.FirstOrDefault()?.StarId
+                    CurrentStarId = exoplanet.Stars.FirstOrDefault()?.Id
                 };
             }
         }
@@ -187,7 +183,7 @@ namespace SpaceCatalog.Business.Services
                 using (var context = contextFactory())
                 {
                     var exoplanet = context.Exoplanets
-                        .Include(existingExoplanet => existingExoplanet.StarExoplanets)
+                        .Include(existingExoplanet => existingExoplanet.Stars)
                         .FirstOrDefault(existingExoplanet => existingExoplanet.Id == request.ExoplanetId);
 
                     if (exoplanet == null)
@@ -220,12 +216,8 @@ namespace SpaceCatalog.Business.Services
 
                     if (newStar != null)
                     {
-                        context.StarExoplanets.RemoveRange(exoplanet.StarExoplanets);
-                        context.StarExoplanets.Add(new StarExoplanet
-                        {
-                            StarId = newStar.Id,
-                            ExoplanetId = exoplanet.Id
-                        });
+                        exoplanet.Stars.Clear();
+                        exoplanet.Stars.Add(newStar);
                         exoplanet.StarSystemId = newStarSystemId.GetValueOrDefault();
                     }
 

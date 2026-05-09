@@ -13,7 +13,6 @@ namespace SpaceCatalog.Data
         public DbSet<Star> Stars => Set<Star>();
         public DbSet<Nebula> Nebulae => Set<Nebula>();
         public DbSet<Exoplanet> Exoplanets => Set<Exoplanet>();
-        public DbSet<StarExoplanet> StarExoplanets => Set<StarExoplanet>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,24 +38,25 @@ namespace SpaceCatalog.Data
                 .WithMany(nebula => nebula.Stars)
                 .HasForeignKey(star => star.NebulaId);
 
-            modelBuilder.Entity<StarExoplanet>()
-                .HasKey(starExoplanet => new
-                {
-                    starExoplanet.StarId,
-                    starExoplanet.ExoplanetId
-                });
-
-            modelBuilder.Entity<StarExoplanet>()
-                .HasOne(starExoplanet => starExoplanet.Star)
-                .WithMany(star => star.StarExoplanets)
-                .HasForeignKey(starExoplanet => starExoplanet.StarId)
-                .IsRequired();
-
-            modelBuilder.Entity<StarExoplanet>()
-                .HasOne(starExoplanet => starExoplanet.Exoplanet)
-                .WithMany(exoplanet => exoplanet.StarExoplanets)
-                .HasForeignKey(starExoplanet => starExoplanet.ExoplanetId)
-                .IsRequired();
+            modelBuilder.Entity<Star>()
+                .HasMany(star => star.Exoplanets)
+                .WithMany(exoplanet => exoplanet.Stars)
+                .UsingEntity<Dictionary<string, object>>(
+                    "StarExoplanets",
+                    right => right
+                        .HasOne<Exoplanet>()
+                        .WithMany()
+                        .HasForeignKey("ExoplanetId")
+                        .IsRequired(),
+                    left => left
+                        .HasOne<Star>()
+                        .WithMany()
+                        .HasForeignKey("StarId")
+                        .IsRequired(),
+                    join =>
+                    {
+                        join.HasKey("StarId", "ExoplanetId");
+                    });
         }
     }
 }

@@ -10,6 +10,6 @@ namespace SpaceCatalog.Domain
         public ExoplanetType Type { get; set; }
         public int StarSystemId { get; set; }
         public StarSystem StarSystem { get; set; } = null!;
-        public ICollection<StarExoplanet> StarExoplanets { get; set; } = new List<StarExoplanet>();
+        public ICollection<Star> Stars { get; set; } = new List<Star>();
     }
 }
