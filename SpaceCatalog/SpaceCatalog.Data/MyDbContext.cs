@@ -9,11 +9,11 @@ namespace SpaceCatalog.Data
         {
         }
 
-        public DbSet<StarSystem> StarSystems { get; set; }
-        public DbSet<Star> Stars { get; set; }
-        public DbSet<Nebula> Nebulae { get; set; }
-        public DbSet<Exoplanet> Exoplanets { get; set; }
-        public DbSet<StarExoplanet> StarExoplanets { get; set; }
+        public DbSet<StarSystem> StarSystems => Set<StarSystem>();
+        public DbSet<Star> Stars => Set<Star>();
+        public DbSet<Nebula> Nebulae => Set<Nebula>();
+        public DbSet<Exoplanet> Exoplanets => Set<Exoplanet>();
+        public DbSet<StarExoplanet> StarExoplanets => Set<StarExoplanet>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
