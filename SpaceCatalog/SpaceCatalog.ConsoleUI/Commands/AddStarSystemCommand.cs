@@ -46,8 +46,8 @@ namespace SpaceCatalog.ConsoleUI.Commands
             var request = new CreateStarSystemRequestDto
             {
                 SystemName = systemName,
-                Rektascenze = rektascenze,
-                Deklinace = deklinace,
+                Rectascension = rektascenze,
+                Declination = deklinace,
                 DistanceLy = distanceLy.Value
             };
 

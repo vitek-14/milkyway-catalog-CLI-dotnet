@@ -37,7 +37,7 @@ namespace SpaceCatalog.ConsoleUI.Commands
                 Console.WriteLine($"ID: {detail.Id}");
                 Console.WriteLine($"Nazev: {detail.Name}");
                 Console.WriteLine($"Vzdalenost: {detail.DistanceLy} ly");
-                Console.WriteLine($"Souradnice: {detail.Rektascenze} / {detail.Deklinace}");
+                Console.WriteLine($"Souradnice: {detail.Rectascension} / {detail.Declination}");
                 Console.WriteLine($"Pocet exoplanet: {detail.Exoplanets.Count}");
                 Console.WriteLine("-------------------------------------------");
                 Console.WriteLine("Hvezdy:");

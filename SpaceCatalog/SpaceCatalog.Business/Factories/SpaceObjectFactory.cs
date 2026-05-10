@@ -14,8 +14,8 @@ namespace SpaceCatalog.Business.Factories
                 DistanceLy = request.DistanceLy,
                 Coordinates = new Coordinates
                 {
-                    Rectascension = request.Rektascenze.Trim(),
-                    Declination = request.Deklinace.Trim()
+                    Rectascension = request.Rectascension.Trim(),
+                    Declination = request.Declination.Trim()
                 }
             };
 

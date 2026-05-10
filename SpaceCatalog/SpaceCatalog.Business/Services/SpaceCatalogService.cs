@@ -56,8 +56,8 @@ namespace SpaceCatalog.Business.Services
                     Id = starSystem.Id,
                     Name = starSystem.Name,
                     DistanceLy = starSystem.DistanceLy,
-                    Rektascenze = starSystem.Coordinates.Rectascension,
-                    Deklinace = starSystem.Coordinates.Declination,
+                    Rectascension = starSystem.Coordinates.Rectascension,
+                    Declination = starSystem.Coordinates.Declination,
                     Stars = starSystem.Stars
                         .OrderBy(star => star.Name)
                         .Select(star => new StarListItemDto
