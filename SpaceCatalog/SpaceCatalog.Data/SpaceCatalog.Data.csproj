@@ -23,4 +23,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\populate_db.sql" />
+  </ItemGroup>
+
 </Project>
