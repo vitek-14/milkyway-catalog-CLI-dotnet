@@ -2,6 +2,9 @@ using SpaceCatalog.Domain.DataTypes;
 
 namespace SpaceCatalog.Business.Dto
 {
+    /// <summary>
+    /// Carries data required to create a star.
+    /// </summary>
     public class CreateStarRequestDto
     {
         public string Name { get; set; } = string.Empty;

@@ -4,10 +4,17 @@ using SpaceCatalog.ConsoleUI.Infrastructure;
 
 namespace SpaceCatalog.ConsoleUI.Commands
 {
+    /// <summary>
+    /// Handles adding a new star system.
+    /// </summary>
     public class AddStarSystemCommand : ICommand
     {
         private readonly ISpaceCatalogService spaceCatalogService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddStarSystemCommand"/> class.
+        /// </summary>
+        /// <param name="spaceCatalogService">The space catalog service.</param>
         public AddStarSystemCommand(ISpaceCatalogService spaceCatalogService)
         {
             this.spaceCatalogService = spaceCatalogService;
@@ -15,6 +22,9 @@ namespace SpaceCatalog.ConsoleUI.Commands
 
         public string Name => "Zalozit novy hvezdny system";
 
+        /// <summary>
+        /// Executes the add star system workflow.
+        /// </summary>
         public void Execute()
         {
             ConsoleRenderer.PrintHeader("ZAKLADANI NOVEHO SYSTEMU");

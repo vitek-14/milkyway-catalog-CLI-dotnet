@@ -3,10 +3,17 @@ using SpaceCatalog.ConsoleUI.Infrastructure;
 
 namespace SpaceCatalog.ConsoleUI.Commands
 {
+    /// <summary>
+    /// Handles displaying star system details.
+    /// </summary>
     public class ShowStarSystemDetailCommand : ICommand
     {
         private readonly ISpaceCatalogService spaceCatalogService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShowStarSystemDetailCommand"/> class.
+        /// </summary>
+        /// <param name="spaceCatalogService">The space catalog service.</param>
         public ShowStarSystemDetailCommand(ISpaceCatalogService spaceCatalogService)
         {
             this.spaceCatalogService = spaceCatalogService;
@@ -14,6 +21,9 @@ namespace SpaceCatalog.ConsoleUI.Commands
 
         public string Name => "Zobrazit detail hvezdneho systemu";
 
+        /// <summary>
+        /// Executes the star system detail workflow.
+        /// </summary>
         public void Execute()
         {
             ConsoleRenderer.PrintHeader("DETAIL HVEZDNEHO SYSTEMU");

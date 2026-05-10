@@ -5,8 +5,15 @@ using SpaceCatalog.ConsoleUI.Commands;
 
 namespace SpaceCatalog.ConsoleUI
 {
+    /// <summary>
+    /// Starts and runs the console application.
+    /// </summary>
     internal class Program
     {
+        /// <summary>
+        /// Configures dependencies and starts the main menu.
+        /// </summary>
+        /// <param name="args">The command line arguments.</param>
         private static void Main(string[] args)
         {
             var contextFactory = SpaceCatalogContextFactory.CreateContextFactory();
@@ -34,6 +41,10 @@ namespace SpaceCatalog.ConsoleUI
             RunMainMenu(mainMenuInvoker);
         }
 
+        /// <summary>
+        /// Runs the main application menu.
+        /// </summary>
+        /// <param name="menuInvoker">The menu command invoker.</param>
         private static void RunMainMenu(MenuInvoker menuInvoker)
         {
             while (true)

@@ -5,10 +5,17 @@ using SpaceCatalog.Domain.DataTypes;
 
 namespace SpaceCatalog.ConsoleUI.Commands
 {
+    /// <summary>
+    /// Handles updating an exoplanet.
+    /// </summary>
     public class UpdateExoplanetCommand : ICommand
     {
         private readonly ISpaceCatalogService spaceCatalogService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateExoplanetCommand"/> class.
+        /// </summary>
+        /// <param name="spaceCatalogService">The space catalog service.</param>
         public UpdateExoplanetCommand(ISpaceCatalogService spaceCatalogService)
         {
             this.spaceCatalogService = spaceCatalogService;
@@ -16,6 +23,9 @@ namespace SpaceCatalog.ConsoleUI.Commands
 
         public string Name => "Upravit exoplanetu";
 
+        /// <summary>
+        /// Executes the update exoplanet workflow.
+        /// </summary>
         public void Execute()
         {
             ConsoleRenderer.PrintHeader("UPRAVIT EXOPLANETU");

@@ -1,5 +1,8 @@
 namespace SpaceCatalog.Business.Dto
 {
+    /// <summary>
+    /// Carries data required to create a star system.
+    /// </summary>
     public class CreateStarSystemRequestDto
     {
         public string SystemName { get; set; } = string.Empty;

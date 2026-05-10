@@ -6,17 +6,30 @@ using SpaceCatalog.Domain;
 
 namespace SpaceCatalog.Business.Services
 {
+    /// <summary>
+    /// Provides catalog operations for space objects.
+    /// </summary>
     public class SpaceCatalogService : ISpaceCatalogService
     {
         private readonly Func<MyDbContext> contextFactory;
         private readonly ISpaceObjectFactory spaceObjectFactory;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SpaceCatalogService"/> class.
+        /// </summary>
+        /// <param name="contextFactory">The database context factory.</param>
+        /// <param name="spaceObjectFactory">The space object factory.</param>
         public SpaceCatalogService(Func<MyDbContext> contextFactory, ISpaceObjectFactory spaceObjectFactory)
         {
             this.contextFactory = contextFactory;
             this.spaceObjectFactory = spaceObjectFactory;
         }
 
+        /// <summary>
+        /// Searches star systems by name.
+        /// </summary>
+        /// <param name="query">The search text.</param>
+        /// <returns>Matching star systems.</returns>
         public List<StarSystemListItemDto> SearchStarSystems(string query)
         {
             var normalizedQuery = query.Trim().ToLower();
@@ -36,6 +49,11 @@ namespace SpaceCatalog.Business.Services
             }
         }
 
+        /// <summary>
+        /// Gets detailed data for a star system.
+        /// </summary>
+        /// <param name="starSystemId">The star system identifier.</param>
+        /// <returns>The star system detail, or null when not found.</returns>
         public StarSystemDetailDto? GetStarSystemDetail(int starSystemId)
         {
             using (var context = contextFactory())
@@ -80,6 +98,11 @@ namespace SpaceCatalog.Business.Services
             }
         }
 
+        /// <summary>
+        /// Creates a star system with its main star.
+        /// </summary>
+        /// <param name="request">The creation request.</param>
+        /// <returns>The operation result.</returns>
         public OperationResultDto CreateStarSystemWithMainStar(CreateStarSystemRequestDto request)
         {
             var systemName = request.SystemName.Trim();
@@ -118,6 +141,12 @@ namespace SpaceCatalog.Business.Services
             }
         }
 
+        /// <summary>
+        /// Creates an exoplanet for a star.
+        /// </summary>
+        /// <param name="starId">The star identifier.</param>
+        /// <param name="request">The creation request.</param>
+        /// <returns>The operation result.</returns>
         public OperationResultDto CreateExoplanetForStar(int starId, CreateExoplanetRequestDto request)
         {
             try
@@ -152,6 +181,11 @@ namespace SpaceCatalog.Business.Services
             }
         }
 
+        /// <summary>
+        /// Gets exoplanet data for editing.
+        /// </summary>
+        /// <param name="exoplanetId">The exoplanet identifier.</param>
+        /// <returns>The edit model, or null when not found.</returns>
         public ExoplanetEditModelDto? GetExoplanetForEdit(int exoplanetId)
         {
             using (var context = contextFactory())
@@ -176,6 +210,11 @@ namespace SpaceCatalog.Business.Services
             }
         }
 
+        /// <summary>
+        /// Updates an exoplanet.
+        /// </summary>
+        /// <param name="request">The update request.</param>
+        /// <returns>The operation result.</returns>
         public OperationResultDto UpdateExoplanet(UpdateExoplanetRequestDto request)
         {
             try

@@ -2,10 +2,17 @@ using SpaceCatalog.ConsoleUI.Infrastructure;
 
 namespace SpaceCatalog.ConsoleUI.Commands
 {
+    /// <summary>
+    /// Displays the search menu.
+    /// </summary>
     public class SearchMenuCommand : ICommand
     {
         private readonly MenuInvoker menuInvoker = new();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchMenuCommand"/> class.
+        /// </summary>
+        /// <param name="searchStarSystemCommand">The search star system command.</param>
         public SearchMenuCommand(SearchStarSystemCommand searchStarSystemCommand)
         {
             menuInvoker.Register("1", searchStarSystemCommand);
@@ -16,6 +23,9 @@ namespace SpaceCatalog.ConsoleUI.Commands
 
         public string Name => "Vyhledat";
 
+        /// <summary>
+        /// Executes the search menu.
+        /// </summary>
         public void Execute()
         {
             while (true)

@@ -3,10 +3,17 @@ using SpaceCatalog.ConsoleUI.Infrastructure;
 
 namespace SpaceCatalog.ConsoleUI.Commands
 {
+    /// <summary>
+    /// Handles searching star systems.
+    /// </summary>
     public class SearchStarSystemCommand : ICommand
     {
         private readonly ISpaceCatalogService spaceCatalogService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchStarSystemCommand"/> class.
+        /// </summary>
+        /// <param name="spaceCatalogService">The space catalog service.</param>
         public SearchStarSystemCommand(ISpaceCatalogService spaceCatalogService)
         {
             this.spaceCatalogService = spaceCatalogService;
@@ -14,6 +21,9 @@ namespace SpaceCatalog.ConsoleUI.Commands
 
         public string Name => "Vyhledat hvezdny system";
 
+        /// <summary>
+        /// Executes the star system search workflow.
+        /// </summary>
         public void Execute()
         {
             ConsoleRenderer.PrintHeader("VYHLEDAT HVEZDNY SYSTEM");

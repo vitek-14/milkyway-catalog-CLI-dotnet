@@ -2,10 +2,18 @@ using SpaceCatalog.ConsoleUI.Infrastructure;
 
 namespace SpaceCatalog.ConsoleUI.Commands
 {
+    /// <summary>
+    /// Displays the add data menu.
+    /// </summary>
     public class AddDataMenuCommand : ICommand
     {
         private readonly MenuInvoker menuInvoker = new();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddDataMenuCommand"/> class.
+        /// </summary>
+        /// <param name="addStarSystemCommand">The add star system command.</param>
+        /// <param name="addExoplanetCommand">The add exoplanet command.</param>
         public AddDataMenuCommand(AddStarSystemCommand addStarSystemCommand, AddExoplanetCommand addExoplanetCommand)
         {
             menuInvoker.Register("1", addStarSystemCommand);
@@ -16,6 +24,9 @@ namespace SpaceCatalog.ConsoleUI.Commands
 
         public string Name => "Pridat";
 
+        /// <summary>
+        /// Executes the add data menu.
+        /// </summary>
         public void Execute()
         {
             while (true)

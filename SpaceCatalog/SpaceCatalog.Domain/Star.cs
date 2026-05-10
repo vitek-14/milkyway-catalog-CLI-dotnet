@@ -3,6 +3,9 @@ using SpaceCatalog.Domain.DataTypes;
 
 namespace SpaceCatalog.Domain
 {
+    /// <summary>
+    /// Represents a star and its catalog relationships.
+    /// </summary>
     public class Star : EntityBase
     {
         public SpectralClass SpectralClass { get; set; }

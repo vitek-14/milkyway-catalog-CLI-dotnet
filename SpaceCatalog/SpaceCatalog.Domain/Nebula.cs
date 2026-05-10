@@ -3,6 +3,9 @@ using SpaceCatalog.Domain.DataTypes;
 
 namespace SpaceCatalog.Domain
 {
+    /// <summary>
+    /// Represents a nebula and its related stars.
+    /// </summary>
     public class Nebula : EntityBase
     {
         public NebulaType Type { get; set; }

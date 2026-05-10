@@ -3,8 +3,16 @@ using SpaceCatalog.Domain.DataTypes;
 
 namespace SpaceCatalog.ConsoleUI.Infrastructure
 {
+    /// <summary>
+    /// Reads and validates console input.
+    /// </summary>
     public static class ConsoleInput
     {
+        /// <summary>
+        /// Reads a required string value.
+        /// </summary>
+        /// <param name="prompt">The prompt text.</param>
+        /// <returns>The entered string.</returns>
         public static string ReadRequiredString(string prompt)
         {
             while (true)
@@ -21,6 +29,11 @@ namespace SpaceCatalog.ConsoleUI.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Reads a required string value or cancels input.
+        /// </summary>
+        /// <param name="prompt">The prompt text.</param>
+        /// <returns>The entered string, or null when canceled.</returns>
         public static string? ReadRequiredStringOrCancel(string prompt)
         {
             while (true)
@@ -42,12 +55,22 @@ namespace SpaceCatalog.ConsoleUI.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Reads an optional string value.
+        /// </summary>
+        /// <param name="prompt">The prompt text.</param>
+        /// <returns>The entered string, or an empty string.</returns>
         public static string ReadOptionalString(string prompt)
         {
             Console.Write(prompt);
             return Console.ReadLine()?.Trim() ?? string.Empty;
         }
 
+        /// <summary>
+        /// Reads an integer value.
+        /// </summary>
+        /// <param name="prompt">The prompt text.</param>
+        /// <returns>The entered integer.</returns>
         public static int ReadInt(string prompt)
         {
             while (true)
@@ -64,6 +87,11 @@ namespace SpaceCatalog.ConsoleUI.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Reads an integer value or cancels input.
+        /// </summary>
+        /// <param name="prompt">The prompt text.</param>
+        /// <returns>The entered integer, or null when canceled.</returns>
         public static int? ReadIntOrCancel(string prompt)
         {
             while (true)
@@ -85,6 +113,11 @@ namespace SpaceCatalog.ConsoleUI.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Reads an optional integer value.
+        /// </summary>
+        /// <param name="prompt">The prompt text.</param>
+        /// <returns>The entered integer, or null when empty or invalid.</returns>
         public static int? ReadNullableInt(string prompt)
         {
             Console.Write(prompt);
@@ -104,6 +137,11 @@ namespace SpaceCatalog.ConsoleUI.Infrastructure
             return null;
         }
 
+        /// <summary>
+        /// Reads a double value.
+        /// </summary>
+        /// <param name="prompt">The prompt text.</param>
+        /// <returns>The entered double.</returns>
         public static double ReadDouble(string prompt)
         {
             while (true)
@@ -125,6 +163,11 @@ namespace SpaceCatalog.ConsoleUI.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Reads a double value or cancels input.
+        /// </summary>
+        /// <param name="prompt">The prompt text.</param>
+        /// <returns>The entered double, or null when canceled.</returns>
         public static double? ReadDoubleOrCancel(string prompt)
         {
             while (true)
@@ -151,6 +194,12 @@ namespace SpaceCatalog.ConsoleUI.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Reads an enum value.
+        /// </summary>
+        /// <typeparam name="TEnum">The enum type.</typeparam>
+        /// <param name="prompt">The prompt text.</param>
+        /// <returns>The entered enum value.</returns>
         public static TEnum ReadEnum<TEnum>(string prompt) where TEnum : struct, Enum
         {
             while (true)
@@ -167,6 +216,12 @@ namespace SpaceCatalog.ConsoleUI.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Reads an enum value or cancels input.
+        /// </summary>
+        /// <typeparam name="TEnum">The enum type.</typeparam>
+        /// <param name="prompt">The prompt text.</param>
+        /// <returns>The entered enum value, or null when canceled.</returns>
         public static TEnum? ReadEnumOrCancel<TEnum>(string prompt) where TEnum : struct, Enum
         {
             while (true)
@@ -188,6 +243,13 @@ namespace SpaceCatalog.ConsoleUI.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Reads an optional enum value.
+        /// </summary>
+        /// <typeparam name="TEnum">The enum type.</typeparam>
+        /// <param name="prompt">The prompt text.</param>
+        /// <param name="currentValue">The current enum value.</param>
+        /// <returns>The entered enum value, or the current value.</returns>
         public static TEnum ReadOptionalEnum<TEnum>(string prompt, TEnum currentValue) where TEnum : struct, Enum
         {
             Console.Write(prompt);
@@ -207,22 +269,40 @@ namespace SpaceCatalog.ConsoleUI.Infrastructure
             return currentValue;
         }
 
+        /// <summary>
+        /// Reads a spectral class value.
+        /// </summary>
+        /// <param name="prompt">The prompt text.</param>
+        /// <returns>The entered spectral class.</returns>
         public static SpectralClass ReadSpectralClass(string prompt)
         {
             return ReadEnum<SpectralClass>(prompt);
         }
 
+        /// <summary>
+        /// Reads a spectral class value or cancels input.
+        /// </summary>
+        /// <param name="prompt">The prompt text.</param>
+        /// <returns>The entered spectral class, or null when canceled.</returns>
         public static SpectralClass? ReadSpectralClassOrCancel(string prompt)
         {
             return ReadEnumOrCancel<SpectralClass>(prompt);
         }
 
+        /// <summary>
+        /// Waits for the user to press Enter.
+        /// </summary>
         public static void WaitForEnter()
         {
             Console.WriteLine("Stisknete ENTER pro navrat do menu...");
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Gets allowed names for an enum type.
+        /// </summary>
+        /// <typeparam name="TEnum">The enum type.</typeparam>
+        /// <returns>The allowed enum names.</returns>
         private static string GetAllowedValues<TEnum>() where TEnum : struct, Enum
         {
             return string.Join(", ", Enum.GetNames<TEnum>().Where(name => name != "Unknown"));

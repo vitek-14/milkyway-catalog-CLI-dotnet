@@ -2,6 +2,9 @@ using SpaceCatalog.Domain.DataTypes;
 
 namespace SpaceCatalog.Business.Dto
 {
+    /// <summary>
+    /// Carries exoplanet data for editing.
+    /// </summary>
     public class ExoplanetEditModelDto
     {
         public int Id { get; set; }

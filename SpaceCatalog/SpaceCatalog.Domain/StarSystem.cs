@@ -3,6 +3,9 @@ using SpaceCatalog.Domain.DataTypes;
 
 namespace SpaceCatalog.Domain
 {
+    /// <summary>
+    /// Represents a star system with stars and exoplanets.
+    /// </summary>
     public class StarSystem : EntityBase
     {
         public double DistanceLy { get; set; }

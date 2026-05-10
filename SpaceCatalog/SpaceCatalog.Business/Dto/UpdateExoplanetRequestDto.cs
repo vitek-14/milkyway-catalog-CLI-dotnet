@@ -2,6 +2,9 @@ using SpaceCatalog.Domain.DataTypes;
 
 namespace SpaceCatalog.Business.Dto
 {
+    /// <summary>
+    /// Carries data required to update an exoplanet.
+    /// </summary>
     public class UpdateExoplanetRequestDto
     {
         public int ExoplanetId { get; set; }

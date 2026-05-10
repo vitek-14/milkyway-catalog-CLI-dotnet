@@ -2,6 +2,9 @@ using SpaceCatalog.Domain.DataTypes;
 
 namespace SpaceCatalog.Business.Dto
 {
+    /// <summary>
+    /// Represents a star item in list output.
+    /// </summary>
     public class StarListItemDto
     {
         public int Id { get; set; }

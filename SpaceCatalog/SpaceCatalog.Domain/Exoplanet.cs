@@ -3,6 +3,9 @@ using SpaceCatalog.Domain.DataTypes;
 
 namespace SpaceCatalog.Domain
 {
+    /// <summary>
+    /// Represents an exoplanet in a star system.
+    /// </summary>
     public class Exoplanet : EntityBase
     {
         public double Mass { get; set; }

@@ -3,8 +3,15 @@ using SpaceCatalog.Domain;
 
 namespace SpaceCatalog.Data
 {
+    /// <summary>
+    /// Represents the Entity Framework database context.
+    /// </summary>
     public class MyDbContext : DbContext
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MyDbContext"/> class.
+        /// </summary>
+        /// <param name="options">The database context options.</param>
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
         }
@@ -14,6 +21,10 @@ namespace SpaceCatalog.Data
         public DbSet<Nebula> Nebulae => Set<Nebula>();
         public DbSet<Exoplanet> Exoplanets => Set<Exoplanet>();
 
+        /// <summary>
+        /// Configures the database model.
+        /// </summary>
+        /// <param name="modelBuilder">The model builder.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<StarSystem>()

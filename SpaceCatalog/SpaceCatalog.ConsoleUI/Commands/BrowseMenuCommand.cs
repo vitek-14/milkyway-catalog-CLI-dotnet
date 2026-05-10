@@ -2,10 +2,17 @@ using SpaceCatalog.ConsoleUI.Infrastructure;
 
 namespace SpaceCatalog.ConsoleUI.Commands
 {
+    /// <summary>
+    /// Displays the browse menu.
+    /// </summary>
     public class BrowseMenuCommand : ICommand
     {
         private readonly MenuInvoker menuInvoker = new();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BrowseMenuCommand"/> class.
+        /// </summary>
+        /// <param name="showStarSystemDetailCommand">The show star system detail command.</param>
         public BrowseMenuCommand(ShowStarSystemDetailCommand showStarSystemDetailCommand)
         {
             menuInvoker.Register("1", showStarSystemDetailCommand);
@@ -16,6 +23,9 @@ namespace SpaceCatalog.ConsoleUI.Commands
 
         public string Name => "Prohlizet";
 
+        /// <summary>
+        /// Executes the browse menu.
+        /// </summary>
         public void Execute()
         {
             while (true)

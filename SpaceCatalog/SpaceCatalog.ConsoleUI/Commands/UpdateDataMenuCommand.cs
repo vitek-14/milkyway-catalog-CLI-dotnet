@@ -2,10 +2,17 @@ using SpaceCatalog.ConsoleUI.Infrastructure;
 
 namespace SpaceCatalog.ConsoleUI.Commands
 {
+    /// <summary>
+    /// Displays the update data menu.
+    /// </summary>
     public class UpdateDataMenuCommand : ICommand
     {
         private readonly MenuInvoker menuInvoker = new();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateDataMenuCommand"/> class.
+        /// </summary>
+        /// <param name="updateExoplanetCommand">The update exoplanet command.</param>
         public UpdateDataMenuCommand(UpdateExoplanetCommand updateExoplanetCommand)
         {
             menuInvoker.Register("1", new NotImplementedCommand("Upravit hvezdny system"));
@@ -16,6 +23,9 @@ namespace SpaceCatalog.ConsoleUI.Commands
 
         public string Name => "Upravit";
 
+        /// <summary>
+        /// Executes the update data menu.
+        /// </summary>
         public void Execute()
         {
             while (true)

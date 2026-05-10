@@ -5,10 +5,17 @@ using SpaceCatalog.Domain.DataTypes;
 
 namespace SpaceCatalog.ConsoleUI.Commands
 {
+    /// <summary>
+    /// Handles adding a new exoplanet.
+    /// </summary>
     public class AddExoplanetCommand : ICommand
     {
         private readonly ISpaceCatalogService spaceCatalogService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddExoplanetCommand"/> class.
+        /// </summary>
+        /// <param name="spaceCatalogService">The space catalog service.</param>
         public AddExoplanetCommand(ISpaceCatalogService spaceCatalogService)
         {
             this.spaceCatalogService = spaceCatalogService;
@@ -16,6 +23,9 @@ namespace SpaceCatalog.ConsoleUI.Commands
 
         public string Name => "Evidovat novou exoplanetu";
 
+        /// <summary>
+        /// Executes the add exoplanet workflow.
+        /// </summary>
         public void Execute()
         {
             ConsoleRenderer.PrintHeader("PRIDAT EXOPLANETU");

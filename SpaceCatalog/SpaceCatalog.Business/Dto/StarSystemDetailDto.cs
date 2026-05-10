@@ -1,5 +1,8 @@
 namespace SpaceCatalog.Business.Dto
 {
+    /// <summary>
+    /// Carries detailed star system data for display.
+    /// </summary>
     public class StarSystemDetailDto
     {
         public int Id { get; set; }

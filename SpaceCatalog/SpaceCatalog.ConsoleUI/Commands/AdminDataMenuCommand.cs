@@ -2,10 +2,18 @@ using SpaceCatalog.ConsoleUI.Infrastructure;
 
 namespace SpaceCatalog.ConsoleUI.Commands
 {
+    /// <summary>
+    /// Displays the administrative data menu.
+    /// </summary>
     public class AdminDataMenuCommand : ICommand
     {
         private readonly MenuInvoker menuInvoker = new();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdminDataMenuCommand"/> class.
+        /// </summary>
+        /// <param name="addDataMenuCommand">The add data menu command.</param>
+        /// <param name="updateDataMenuCommand">The update data menu command.</param>
         public AdminDataMenuCommand(AddDataMenuCommand addDataMenuCommand, UpdateDataMenuCommand updateDataMenuCommand)
         {
             menuInvoker.Register("1", addDataMenuCommand);
@@ -15,6 +23,9 @@ namespace SpaceCatalog.ConsoleUI.Commands
 
         public string Name => "Sprava dat";
 
+        /// <summary>
+        /// Executes the administrative data menu.
+        /// </summary>
         public void Execute()
         {
             while (true)
